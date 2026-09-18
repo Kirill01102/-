@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STARTPLUSCOURIER — заработок на привлечении курьеров</title>
+<meta name="description" content="Приводите курьеров в доставку и получайте до 60 000 ₽ с одного человека. Бесплатное обучение, выплаты дважды в месяц, 20+ городов России.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#12131A;
+  --slate:#1E2029;
+  --fog:#F5F4F0;
+  --paper:#FFFFFF;
+  --line:#E4E2DC;
+  --line-dark:#2C2E38;
+  --muted:#6B6D77;
+  --lime:#C8F04A;
+  --lime-deep:#8FB010;
+  --ink:#12131A;
+  --r:16px;
+  --max:1140px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--fog);color:var(--ink);
+  font:400 16px/1.65 'Inter',system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:'Unbounded',sans-serif;letter-spacing:-.03em;line-height:1.08}
+a{color:inherit}
+.mono{font-family:'IBM Plex Mono',monospace}
+
+/* ============ NAV ============ */
+nav{position:sticky;top:0;z-index:100;background:rgba(18,19,26,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line-dark)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:15px 0}
+.logo{display:flex;align-items:center;gap:11px;color:#fff;font-family:'Unbounded';font-weight:800;font-size:16px;letter-spacing:-.02em;text-decoration:none}
+.logo i{width:26px;height:26px;border-radius:8px;background:var(--lime);display:grid;place-items:center;font-style:normal;color:var(--night);font-size:14px;font-weight:800}
+.nav-links{display:flex;gap:26px;font-size:14px;font-weight:500}
+.nav-links a{color:#A7A9B4;text-decoration:none;transition:.15s}
+.nav-links a:hover{color:#fff}
+.nav-cta{background:var(--lime);color:var(--night);padding:10px 20px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;white-space:nowrap;transition:.15s}
+.nav-cta:hover{background:#d5fa62}
+@media(max-width:900px){.nav-links{display:none}}
+
+/* ============ HERO ============ */
+.hero{background:var(--night);color:#fff;padding:80px 0 90px;position:relative;overflow:hidden}
+.hero::after{
+  content:"";position:absolute;right:-180px;top:-120px;width:620px;height:620px;
+  background:radial-gradient(circle,rgba(200,240,74,.12),transparent 62%);pointer-events:none;
+}
+.hero-in{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
+@media(max-width:940px){.hero-in{grid-template-columns:1fr;gap:44px}}
+.badge{
+  display:inline-flex;align-items:center;gap:9px;padding:7px 14px;border-radius:99px;
+  border:1px solid var(--line-dark);background:#191B24;font-size:13px;font-weight:600;color:#C9CBD4;margin-bottom:26px;
+}
+.badge .pulse{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 0 rgba(200,240,74,.6);animation:p 2.4s infinite}
+@keyframes p{70%{box-shadow:0 0 0 9px rgba(200,240,74,0)}100%{box-shadow:0 0 0 0 rgba(200,240,74,0)}}
+.hero h1{font-size:clamp(34px,5.4vw,60px);font-weight:800}
+.hero h1 mark{background:none;color:var(--lime)}
+.hero p.lede{margin-top:24px;font-size:18px;color:#B4B6C0;max-width:52ch}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.btn{display:inline-block;padding:15px 28px;border-radius:12px;font-weight:700;font-size:15px;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:.16s;font-family:'Inter'}
+.btn-lime{background:var(--lime);color:var(--night)}
+.btn-lime:hover{background:#d5fa62;transform:translateY(-1px)}
+.btn-ghost{border-color:#383A45;color:#fff;background:transparent}
+.btn-ghost:hover{background:#1E2029}
+.hero-stats{display:flex;gap:34px;margin-top:44px;flex-wrap:wrap}
+.hero-stats div .n{font-family:'Unbounded';font-weight:800;font-size:26px;color:var(--lime);letter-spacing:-.03em}
+.hero-stats div .l{font-size:13px;color:#8A8C97;margin-top:3px}
+
+.hero-card{background:#191B24;border:1px solid var(--line-dark);border-radius:20px;padding:30px}
+.hero-card .cap{font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7C7E8A;margin-bottom:18px}
+.pay-row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid var(--line-dark);font-size:14px;color:#C9CBD4}
+.pay-row:last-of-type{border-bottom:0}
+.pay-row b{font-family:'IBM Plex Mono';color:#fff;font-size:15px}
+.hero-card .tot{margin-top:20px;padding-top:20px;border-top:2px solid var(--lime);display:flex;justify-content:space-between;align-items:baseline}
+.hero-card .tot span{font-size:13px;color:#8A8C97}
+.hero-card .tot b{font-family:'Unbounded';font-weight:800;font-size:30px;color:var(--lime);letter-spacing:-.03em}
+
+/* ============ GENERIC SECTION ============ */
+section{padding:86px 0}
+.eyebrow{font-family:'IBM Plex Mono';font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--lime-deep);margin-bottom:14px}
+.sec-h{font-size:clamp(27px,4vw,42px);font-weight:800;max-width:20ch}
+.sec-p{color:var(--muted);max-width:62ch;margin-top:16px;font-size:17px}
+
+
+/* ============ INTRO ============ */
+.intro{background:var(--paper);border-bottom:1px solid var(--line);padding:74px 0}
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+@media(max-width:900px){.intro-grid{grid-template-columns:1fr;gap:36px}}
+.intro h2{font-size:clamp(25px,3.6vw,36px);font-weight:800;max-width:18ch}
+.intro .p{color:#3C3E46;font-size:17px;margin-top:20px;max-width:60ch}
+.intro .p + .p{margin-top:15px}
+.sign{display:flex;align-items:center;gap:15px;margin-top:30px;padding-top:24px;border-top:1px solid var(--line)}
+.sign .av{width:52px;height:52px;border-radius:50%;background:var(--night);color:var(--lime);display:grid;place-items:center;font-family:'Unbounded';font-weight:800;font-size:19px;flex:none}
+.sign .who b{display:block;font-size:15px;font-weight:600}
+.sign .who span{font-size:13px;color:var(--muted)}
+.facts{display:grid;gap:12px}
+.fact{display:grid;grid-template-columns:38px 1fr;gap:16px;padding:19px 21px;border:1px solid var(--line);border-radius:13px;background:var(--fog);align-items:center}
+.fact .fi{width:38px;height:38px;border-radius:10px;background:var(--paper);border:1px solid var(--line);display:grid;place-items:center;font-size:16px}
+.fact b{display:block;font-size:15px;font-weight:600}
+.fact span{margin-top:4px;display:block}
+.fact span{font-size:14px;color:var(--muted);line-height:1.55}
+
+/* ============ WHAT IS IT ============ */
+.what{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.what-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+@media(max-width:880px){.what-grid{grid-template-columns:1fr}}
+.wcard{border:1px solid var(--line);border-radius:var(--r);padding:28px;background:var(--fog);transition:.18s}
+.wcard:hover{border-color:var(--ink);transform:translateY(-2px)}
+.wcard .ic{width:44px;height:44px;border-radius:12px;background:var(--night);color:var(--lime);display:grid;place-items:center;font-size:19px;margin-bottom:18px}
+.wcard h3{font-size:17px;font-weight:600;margin-bottom:9px}
+.wcard p{font-size:15px;color:var(--muted)}
+
+/* ============ STEPS ============ */
+.steps{counter-reset:s;display:grid;gap:0;margin-top:46px;border-top:1px solid var(--line)}
+.step{
+  counter-increment:s;display:grid;grid-template-columns:78px 1fr;gap:26px;
+  padding:30px 0;border-bottom:1px solid var(--line);align-items:start;
+}
+.step::before{
+  content:counter(s,decimal-leading-zero);font-family:'IBM Plex Mono';font-weight:700;
+  font-size:26px;color:var(--line);letter-spacing:-.02em;
+}
+.step:hover::before{color:var(--lime-deep)}
+.step h3{font-size:19px;font-weight:600;margin-bottom:8px}
+.step p{color:var(--muted);font-size:15px;max-width:66ch}
+@media(max-width:640px){.step{grid-template-columns:52px 1fr;gap:16px}.step::before{font-size:20px}}
+
+/* ============ TRAINING (dark band) ============ */
+.train{background:var(--night);color:#fff}
+.train .sec-p{color:#A7A9B4}
+.train-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+@media(max-width:880px){.train-grid{grid-template-columns:1fr;gap:38px}}
+.train-list{list-style:none;display:grid;gap:14px}
+.train-list li{display:grid;grid-template-columns:26px 1fr;gap:14px;align-items:start;font-size:16px;color:#D2D4DC}
+.train-list li i{width:24px;height:24px;border-radius:50%;background:rgba(200,240,74,.13);color:var(--lime);display:grid;place-items:center;font-style:normal;font-size:13px;font-weight:700}
+.free-tag{display:inline-block;background:var(--lime);color:var(--night);font-family:'IBM Plex Mono';font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:6px 13px;border-radius:7px;margin-bottom:20px}
+
+/* ============ CALCULATOR ============ */
+.calc-shell{background:var(--paper);border:1px solid var(--line);border-radius:22px;overflow:hidden;margin-top:44px;box-shadow:0 2px 0 var(--line)}
+.calc-grid{display:grid;grid-template-columns:1fr 380px}
+@media(max-width:900px){.calc-grid{grid-template-columns:1fr}}
+.calc-ctrl{padding:34px}
+.field{margin-bottom:30px}
+.field:last-child{margin-bottom:0}
+.field .lab{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:13px;gap:12px}
+.field .lab .t{font-weight:600;font-size:15px}
+.field .lab .v{font-family:'IBM Plex Mono';font-weight:700;font-size:19px;color:var(--ink)}
+select{
+  width:100%;padding:14px 15px;border:1px solid var(--line);border-radius:12px;background:var(--fog);
+  font:600 15px 'Inter',sans-serif;color:var(--ink);cursor:pointer;
+  appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%236B6D77' stroke-width='1.8' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat:no-repeat;background-position:right 16px center;
+}
+input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:99px;cursor:pointer;
+  background:linear-gradient(var(--lime-deep),var(--lime-deep)) no-repeat,var(--line);
+  background-size:var(--fill,50%) 100%;
+}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:#fff;border:4px solid var(--lime-deep);box-shadow:0 2px 7px rgba(0,0,0,.16);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#fff;border:4px solid var(--lime-deep);box-shadow:0 2px 7px rgba(0,0,0,.16);cursor:pointer}
+.scale{display:flex;justify-content:space-between;font-family:'IBM Plex Mono';font-size:11px;color:#9A9CA6;margin-top:8px}
+
+.calc-out{background:var(--night);color:#fff;padding:36px 32px;display:flex;flex-direction:column;justify-content:center}
+.calc-out .cap{font-family:'IBM Plex Mono';font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#7C7E8A;margin-bottom:10px}
+.calc-out .big{font-family:'Unbounded';font-weight:800;font-size:clamp(34px,6vw,48px);color:var(--lime);letter-spacing:-.04em;line-height:1}
+.calc-out .sub{font-size:13px;color:#8A8C97;margin-top:8px}
+.calc-out .rows{margin-top:26px;border-top:1px solid var(--line-dark);padding-top:20px;display:grid;gap:11px}
+.calc-out .rows div{display:flex;justify-content:space-between;font-size:14px;color:#B4B6C0}
+.calc-out .rows b{font-family:'IBM Plex Mono';color:#fff}
+.hintbox{margin-top:22px;padding:13px 15px;background:#191B24;border-left:2px solid var(--lime);border-radius:0 9px 9px 0;font-size:13px;color:#B4B6C0;line-height:1.55}
+.calc-note{margin-top:20px;font-size:13px;color:var(--muted);max-width:70ch}
+
+/* ============ FAQ ============ */
+details{border:1px solid var(--line);background:var(--paper);border-radius:13px;margin-bottom:11px;overflow:hidden}
+details[open]{border-color:var(--ink)}
+summary{padding:20px 24px;font-weight:600;font-size:16px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:'IBM Plex Mono';font-size:22px;color:var(--muted);flex:none;line-height:1}
+details[open] summary::after{content:"–"}
+details p{padding:0 24px 22px;color:var(--muted);font-size:15px;max-width:74ch}
+
+/* ============ FORM ============ */
+.form-sec{background:var(--night);color:#fff}
+.form-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:start}
+@media(max-width:900px){.form-grid{grid-template-columns:1fr;gap:38px}}
+.form-sec .sec-p{color:#A7A9B4}
+.trust{list-style:none;margin-top:30px;display:grid;gap:13px}
+.trust li{display:grid;grid-template-columns:22px 1fr;gap:13px;font-size:15px;color:#C9CBD4;align-items:start}
+.trust li i{color:var(--lime);font-style:normal;font-weight:700}
+.form-card{background:var(--paper);border-radius:20px;padding:34px;color:var(--ink)}
+.form-card h3{font-size:21px;font-weight:600;margin-bottom:6px}
+.form-card .fp{font-size:14px;color:var(--muted);margin-bottom:26px}
+.tg-card{text-align:center;display:flex;flex-direction:column;align-items:center}
+.tg-ic{width:74px;height:74px;border-radius:20px;background:#229ED9;display:grid;place-items:center;margin-bottom:20px;box-shadow:0 10px 24px rgba(34,158,217,.28)}
+.tg-card h3{font-size:23px}
+.tg-card .fp{max-width:34ch}
+.tg-btn{display:inline-flex;align-items:center;gap:11px;width:100%;justify-content:center;padding:17px 24px;border-radius:13px;background:#229ED9;color:#fff;font-weight:700;font-size:16px;text-decoration:none;transition:.16s}
+.tg-btn:hover{background:#1b8ec4;transform:translateY(-1px)}
+.tg-alt{margin-top:18px;font-size:13px;color:var(--muted)}
+.tg-alt b{color:var(--ink)}
+.fg{margin-bottom:17px}
+.fg label{display:block;font-size:13px;font-weight:600;margin-bottom:7px}
+.fg input,.fg select,.fg textarea{
+  width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:11px;
+  font:400 15px 'Inter',sans-serif;background:var(--fog);color:var(--ink);
+}
+.fg textarea{resize:vertical;min-height:82px}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--ink);background:#fff}
+.consent{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;margin:22px 0;font-size:13px;color:var(--muted);line-height:1.55}
+.consent input{width:19px;height:19px;margin-top:2px;accent-color:var(--lime-deep);cursor:pointer}
+.consent a{color:var(--ink);text-decoration:underline;text-underline-offset:2px}
+.submit{width:100%;padding:16px;border:0;border-radius:12px;background:var(--night);color:#fff;font:700 16px 'Inter';cursor:pointer;transition:.16s}
+.submit:hover:not(:disabled){background:#000}
+.submit:disabled{opacity:.4;cursor:not-allowed}
+.ok{display:none;padding:18px;border-radius:12px;background:#EDF7D4;border:1px solid var(--lime-deep);font-size:15px;font-weight:600;color:#4C5F08;margin-top:18px}
+.err{color:#B5321B;font-size:13px;margin-top:6px;display:none}
+
+:focus-visible{outline:2px solid var(--lime-deep);outline-offset:3px;border-radius:4px}
+
+/* ============ FOOTER ============ */
+footer{background:#0C0D12;color:#7C7E8A;padding:46px 0 56px;font-size:13px;line-height:1.75}
+footer .flinks{display:flex;gap:20px;flex-wrap:wrap;margin-top:16px}
+footer a{color:#A7A9B4;text-decoration:none}
+footer a:hover{color:var(--lime)}
+.disclaim{margin-top:22px;padding-top:20px;border-top:1px solid var(--line-dark);max-width:78ch;color:#5E606B}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto}}
+</style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112790513', 'ym');
+
+    ym(112790513, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112790513" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="logo" href="#top"><i>S</i>START+</a>
+    <div class="nav-links">
+      <a href="#about">О компании</a>
+      <a href="#what">Что это за работа</a>
+      <a href="#how">Как это работает</a>
+      <a href="#train">Обучение</a>
+      <a href="#calc">Калькулятор</a>
+      <a href="#faq">Вопросы</a>
+    </div>
+    <a class="nav-cta" href="#form">Написать в Telegram</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="wrap hero-in">
+    <div>
+      <div class="badge"><span class="pulse"></span>Набор партнёров открыт в 20+ городах России</div>
+      <h1>Приводите курьеров в доставку и получайте до <mark>60 000 ₽</mark> с одного человека</h1>
+      <p class="lede">Вы находите людей, которые хотят работать курьером, и помогаете им зарегистрироваться. Дальше сервис платит вам за каждого, кто вышел на заказы. Опыт не нужен — обучение бесплатное.</p>
+      <div class="hero-btns">
+        <a class="btn btn-lime" href="#form">Стать партнёром</a>
+        <a class="btn btn-ghost" href="#calc">Посчитать доход</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="n">до 60 000 ₽</div><div class="l">с одного курьера</div></div>
+        <div><div class="n">20+</div><div class="l">городов России</div></div>
+        <div><div class="n">2 раза</div><div class="l">выплаты в месяц</div></div>
+        <div><div class="n">0 ₽</div><div class="l">вложений на старте</div></div>
+      </div>
+    </div>
+
+    <aside class="hero-card">
+      <div class="cap">Пример месяца партнёра</div>
+      <div class="pay-row"><span>Привлечено курьеров</span><b>8</b></div>
+      <div class="pay-row"><span>Вышли на заказы</span><b>6</b></div>
+      <div class="pay-row"><span>Средняя выплата за курьера</span><b>28 500 ₽</b></div>
+      <div class="pay-row"><span>Часов работы в неделю</span><b>~10</b></div>
+      <div class="tot"><span>Доход за месяц</span><b>171 000 ₽</b></div>
+    </aside>
+  </div>
+</header>
+
+
+<!-- ============ INTRO ============ -->
+<section class="intro" id="about">
+  <div class="wrap intro-grid">
+    <div>
+      <div class="eyebrow">Кто мы</div>
+      <h2>Мы рекрутинговая компания START PLUS COURIER</h2>
+      <p class="p">Мы занимаемся подбором линейного персонала для сервисов доставки: находим людей, которые ищут работу курьером, и доводим их до первого рабочего дня. Это наша основная деятельность, а не разовая акция.</p>
+      <p class="p">Спрос на курьеров стабильно превышает то, что мы закрываем своими силами. Поэтому мы открыли партнёрскую программу: вы приводите кандидатов, мы берём на себя оформление, документы и расчёты с сервисом, а вы получаете выплату за каждого, кто вышел на заказы.</p>
+      <p class="p">Мы работаем официально как ИП, заключаем с партнёрами договор и не берём денег за вход, обучение или материалы. Наш доход — процент от сервиса, поэтому нам выгодно, чтобы вы зарабатывали как можно больше.</p>
+      <div class="sign">
+        <div class="av" style="overflow:hidden;padding:0"><img src="data:image/jpeg;base64,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" alt="Кирилл Стародубов" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+        <div class="who">
+          <b>Кирилл Стародубов</b>
+          <span>Основатель рекрутинговой компании START PLUS COURIER</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="facts">
+      <div class="fact">
+        <div class="fi">◈</div>
+        <div><b>Официальное трудоустройство</b></div>
+      </div>
+      <div class="fact">
+        <div class="fi">₽</div>
+        <div><b>Мы не берём с вас денег</b><span>Ни за обучение, ни за доступ, ни за материалы. Если где-то просят предоплату за партнёрство — это не мы.</span></div>
+      </div>
+      <div class="fact">
+        <div class="fi">▤</div>
+        <div><b>Прозрачные начисления</b><span>В кабинете видно каждого приведённого курьера и его заказы. Сумма считается по ставке города, а не «на усмотрение».</span></div>
+      </div>
+      <div class="fact">
+        <div class="fi">◷</div>
+        <div><b>Официальные выплаты</b></div>
+      </div>
+      <div class="fact">
+        <div class="fi">☎</div>
+        <div><b>Живая поддержка</b><span>У каждого нового партнёра есть куратор на первый месяц и общий чат, где отвечают люди, а не бот.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT ============ -->
+<section class="what" id="what">
+  <div class="wrap">
+    <div class="eyebrow">Что это за работа</div>
+    <h2 class="sec-h">Вы — тот, кто соединяет людей и работу</h2>
+    <p class="sec-p">Сервисам доставки постоянно нужны курьеры. Найти их самостоятельно сервис не успевает, поэтому платит партнёрам за каждого приведённого человека. Ваша задача — рассказать о вакансии и довести кандидата до первого заказа.</p>
+
+    <div class="what-grid">
+      <div class="wcard">
+        <div class="ic">◎</div>
+        <h3>Это не курьерская работа</h3>
+        <p>Вам не нужно ничего развозить. Вы работаете с людьми: находите кандидатов, отвечаете на вопросы, помогаете с регистрацией.</p>
+      </div>
+      <div class="wcard">
+        <div class="ic">▤</div>
+        <h3>Полностью удалённо</h3>
+        <p>Всё делается с телефона или компьютера. Объявления, переписка, отправка ссылки на регистрацию. Место жительства не имеет значения.</p>
+      </div>
+      <div class="wcard">
+        <div class="ic">◷</div>
+        <h3>Свободный график</h3>
+        <p>Совмещается с основной работой или учёбой. Большинство партнёров тратят 1–2 часа в день на переписку с кандидатами.</p>
+      </div>
+      <div class="wcard">
+        <div class="ic">₽</div>
+        <h3>Оплата за результат</h3>
+        <p>Деньги начисляются, когда курьер выполнил заказы. Чем больше он работает в первый месяц, тем выше ваша выплата — вплоть до 60 000 ₽.</p>
+      </div>
+      <div class="wcard">
+        <div class="ic">△</div>
+        <h3>Без вложений</h3>
+        <p>Стартовать можно с бесплатных площадок объявлений и чатов. Мы даём готовые тексты, макеты и скрипты — платить за них не нужно.</p>
+      </div>
+      <div class="wcard">
+        <div class="ic">◇</div>
+        <h3>Прозрачная статистика</h3>
+        <p>В личном кабинете видно каждого приведённого курьера: сколько заказов выполнил, сколько начислено и когда будет выплата.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW ============ -->
+<section id="how">
+  <div class="wrap">
+    <div class="eyebrow">Как это работает</div>
+    <h2 class="sec-h">Пять шагов от заявки до первой выплаты</h2>
+    <p class="sec-p">Схема одинаковая в любом городе. Первую выплату партнёры обычно получают на 3–4 неделе.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div>
+          <h3>Оставляете заявку и проходите обучение</h3>
+          <p>Мы связываемся с вами, открываем доступ в личный кабинет и в обучающий раздел. Обучение бесплатное и занимает пару вечеров.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Размещаете вакансию</h3>
+          <p>Берёте готовые тексты и картинки из базы материалов и публикуете их на площадках объявлений, в тематических чатах и соцсетях своего города.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Общаетесь с кандидатом</h3>
+          <p>Отвечаете на типовые вопросы: сколько платят, какой график, нужен ли транспорт. На частые возражения есть готовые ответы в обучении.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Помогаете зарегистрироваться</h3>
+          <p>Отправляете кандидату вашу персональную ссылку. Он загружает документы и проходит проверку. Курьер закрепляется за вами автоматически.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div>
+          <h3>Получаете выплату</h3>
+          <p>Курьер выходит на заказы, вам начисляются деньги. Вывод на карту или счёт самозанятого — два раза в месяц по запросу из кабинета.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRAINING ============ -->
+<section class="train" id="train">
+  <div class="wrap train-grid">
+    <div>
+      <div class="free-tag">Бесплатно · без предоплат</div>
+      <h2 class="sec-h" style="color:#fff">Обучение, после которого понятно, что делать завтра утром</h2>
+      <p class="sec-p">Никакой теории про «мышление предпринимателя». Только практика: где искать людей, что им писать и как довести до регистрации. Доступ открывается сразу после заявки и остаётся навсегда.</p>
+      <a class="btn btn-lime" href="#form" style="margin-top:30px">Получить доступ</a>
+    </div>
+    <ul class="train-list">
+      <li><i>✓</i><span>Где искать кандидатов: площадки объявлений, чаты, соцсети, офлайн-точки</span></li>
+      <li><i>✓</i><span>Готовые тексты вакансий и макеты для объявлений — просто копируете</span></li>
+      <li><i>✓</i><span>Как настроить объявление, чтобы его видели именно ваши кандидаты</span></li>
+      <li><i>✓</i><span>Скрипты переписки: первое сообщение, ответы на вопросы, работа с отказами</span></li>
+      <li><i>✓</i><span>Разбор документов и типичных ошибок при регистрации курьера</span></li>
+      <li><i>✓</i><span>Как мотивировать курьера выйти на заказы — от этого зависит ваша выплата</span></li>
+      <li><i>✓</i><span>Личный куратор и чат поддержки на первый месяц</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ CALCULATOR ============ -->
+<section id="calc">
+  <div class="wrap">
+    <div class="eyebrow">Калькулятор</div>
+    <h2 class="sec-h">Посчитайте, сколько вы будете получать</h2>
+    <p class="sec-p">Выберите город и подвиньте ползунки. Выплата зависит от ставки города и от того, сколько заказов курьер успеет выполнить в первые 20 дней.</p>
+
+    <div class="calc-shell">
+      <div class="calc-grid">
+        <div class="calc-ctrl">
+          <div class="field">
+            <div class="lab"><span class="t">Город</span></div>
+            <select id="city" aria-label="Город"></select>
+          </div>
+
+          <div class="field">
+            <div class="lab"><span class="t">Курьеров в месяц</span><span class="v" id="cv">6</span></div>
+            <input type="range" id="couriers" min="1" max="30" value="6" aria-label="Курьеров в месяц">
+            <div class="scale"><span>1</span><span>15</span><span>30</span></div>
+          </div>
+
+          <div class="field">
+            <div class="lab"><span class="t">Заказов на курьера за 20 дней</span><span class="v" id="ov">60</span></div>
+            <input type="range" id="orders" min="5" max="100" value="60" aria-label="Заказов на курьера">
+            <div class="scale"><span>5</span><span>50</span><span>100</span></div>
+          </div>
+        </div>
+
+        <div class="calc-out">
+          <div class="cap">Ваш доход за месяц</div>
+          <div class="big" id="total">—</div>
+          <div class="sub" id="sub">—</div>
+          <div class="rows">
+            <div><span>Ставка за заказ</span><b id="rate">—</b></div>
+            <div><span>Выплата за одного курьера</span><b id="per">—</b></div>
+            <div><span>Максимум за курьера в городе</span><b id="cap">—</b></div>
+            <div><span>Всего заказов</span><b id="ords">—</b></div>
+          </div>
+          <div class="hintbox" id="hint">—</div>
+        </div>
+      </div>
+    </div>
+    <p class="calc-note">Расчёт ориентировочный. Ставки по городам периодически пересматриваются — актуальные значения партнёр видит в личном кабинете. Доход не гарантирован и зависит от того, сколько курьеров вы привлечёте и как активно они будут работать.</p>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="what" id="faq">
+  <div class="wrap">
+    <div class="eyebrow">Вопросы</div>
+    <h2 class="sec-h">Что спрашивают чаще всего</h2>
+    <div style="margin-top:38px">
+      <details open><summary>Нужен ли опыт или образование?</summary><p>Нет. Требуется возраст от 18 лет, телефон с интернетом и готовность общаться с людьми в переписке. Всему остальному учим бесплатно.</p></details>
+      <details><summary>Нужно ли вкладывать деньги на старте?</summary><p>Нет. Материалы, обучение и личный кабинет бесплатны. Начать можно с бесплатных площадок объявлений. Платная реклама — по желанию, когда вы уже понимаете, что окупается.</p></details>
+      <details><summary>Когда придут первые деньги?</summary><p>Начисление происходит после того, как курьер выполнит заказы. Обычно первая выплата приходит на 3–4 неделе после старта. Вывод — дважды в месяц по запросу из кабинета.</p></details>
+      <details><summary>Откуда берутся 60 000 ₽ с курьера?</summary><p>Это максимальная сумма в городах с самой высокой ставкой при условии, что курьер выполнит 100 заказов за первые 20 дней. В среднем выплата за активного курьера получается меньше — калькулятор выше показывает реалистичный диапазон.</p></details>
+      <details><summary>Как оформляются выплаты?</summary><p>Работа ведётся по договору. Для получения выплат нужен статус самозанятого или ИП — помогаем оформить его на обучении, это бесплатно и занимает 15 минут в приложении банка.</p></details>
+      <details><summary>А если курьер не выйдет на заказы?</summary><p>Тогда выплаты за него не будет — оплата идёт за результат. Поэтому в обучении отдельный блок о том, как поддерживать связь с курьером в первые дни: это напрямую влияет на ваш доход.</p></details>
+      <details><summary>Можно ли работать не в своём городе?</summary><p>Да. Многие партнёры размещают объявления сразу по нескольким городам из списка. Ограничений по вашему месту жительства нет.</p></details>
+      <details><summary>Сколько времени это занимает?</summary><p>Партнёры на старте тратят 1–2 часа в день: разместить объявления и ответить кандидатам. Дальше время сокращается, потому что часть вопросов закрывают готовые шаблоны.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FORM ============ -->
+<section class="form-sec" id="form">
+  <div class="wrap form-grid">
+    <div>
+      <div class="eyebrow" style="color:var(--lime)">Связаться</div>
+      <h2 class="sec-h" style="color:#fff">Напишите нам в Telegram — откроем доступ к обучению</h2>
+      <p class="sec-p">Ответим в течение рабочего дня, расскажем про условия и заведём личный кабинет. Обращение ни к чему не обязывает.</p>
+      <ul class="trust">
+        <li><i>✓</i><span>Обучение и материалы — бесплатно, без предоплат</span></li>
+        <li><i>✓</i><span>Общаемся в удобном вам мессенджере</span></li>
+        <li><i>✓</i><span>Отвечает живой человек, а не бот</span></li>
+        <li><i>✓</i><span>Никакого спама — пишем только по делу</span></li>
+      </ul>
+    </div>
+
+    <div class="form-card tg-card">
+      <div class="tg-ic" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="34" height="34" fill="none"><path d="M21.5 4.2 2.9 11.4c-1 .4-1 1.4-.2 1.7l4.7 1.5 1.8 5.6c.2.6.4.8.8.8.4 0 .6-.2.9-.5l2.5-2.4 4.8 3.6c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.2-.5-1.8-1.3-1.5Z" fill="#fff"/></svg>
+      </div>
+      <h3>Написать в Telegram</h3>
+      <p class="fp">Нажмите кнопку — откроется чат. Напишите «Хочу стать партнёром», и мы ответим в течение рабочего дня.</p>
+      <a class="tg-btn" href="https://t.me/linkonhrr" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M21.5 4.2 2.9 11.4c-1 .4-1 1.4-.2 1.7l4.7 1.5 1.8 5.6c.2.6.4.8.8.8.4 0 .6-.2.9-.5l2.5-2.4 4.8 3.6c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.2-.5-1.8-1.3-1.5Z" fill="currentColor"/></svg>
+        Открыть чат @linkonhrr
+      </a>
+      <p class="tg-alt">Или найдите нас в поиске Telegram: <b>@linkonhrr</b></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo" style="margin-bottom:14px"><i>S</i>START+</div>
+    Партнёрская программа по привлечению курьеров в сервисы доставки. Работает в 20+ городах России.
+    <div class="flinks">
+      <a href="https://t.me/linkonhrr" target="_blank" rel="noopener">Написать в Telegram</a>
+      <a href="#top">Наверх</a>
+    </div>
+    <p class="disclaim">Указанные суммы — максимально возможные выплаты при условии выполнения курьером 100 заказов в первые 20 дней после регистрации. Фактический доход зависит от города, количества привлечённых курьеров и их активности и не является гарантированным. Ставки по городам могут изменяться; актуальные значения публикуются в личном кабинете партнёра.</p>
+  </div>
+</footer>
+
+<script>
+/* ---------- Города и ставки: [ставка за заказ ₽, максимум за курьера ₽] ---------- */
+const CITIES = [
+  ["Москва",              600, 60000],
+  ["Санкт-Петербург",     575, 57500],
+  ["Балашиха",            560, 56000],
+  ["Химки",               550, 55000],
+  ["Подольск",            540, 54000],
+  ["Екатеринбург",        505, 50500],
+  ["Новосибирск",         500, 50000],
+  ["Казань",              485, 48500],
+  ["Нижний Новгород",     480, 48000],
+  ["Краснодар",           470, 47000],
+  ["Самара",              460, 46000],
+  ["Ростов-на-Дону",      450, 45000],
+  ["Челябинск",           445, 44500],
+  ["Уфа",                 440, 44000],
+  ["Пермь",               430, 43000],
+  ["Воронеж",             425, 42500],
+  ["Волгоград",           420, 42000],
+  ["Тюмень",              420, 42000],
+  ["Красноярск",          410, 41000],
+  ["Саратов",             405, 40500],
+  ["Омск",                400, 40000],
+  ["Тольятти",            390, 39000],
+  ["Ижевск",              385, 38500],
+  ["Барнаул",             380, 38000]
+];
+
+const rub = n => n.toLocaleString('ru-RU') + ' ₽';
+const plural = (n,a,b,c) => {const m=n%100,d=n%10; return m>=11&&m<=14?c:d===1?a:d>=2&&d<=4?b:c;};
+
+/* заполняем список городов калькулятора */
+const citySel = document.getElementById('city');
+CITIES.forEach((c,i)=>{
+  const o=document.createElement('option');
+  o.value=i; o.textContent=`${c[0]} — до ${c[2].toLocaleString('ru-RU')} ₽ за курьера`;
+  citySel.appendChild(o);
+});
+
+/* ---------- калькулятор ---------- */
+const cs=document.getElementById('couriers'), os=document.getElementById('orders');
+const cv=document.getElementById('cv'), ov=document.getElementById('ov');
+const elTotal=document.getElementById('total'), elSub=document.getElementById('sub');
+const elRate=document.getElementById('rate'), elPer=document.getElementById('per');
+const elCap=document.getElementById('cap'), elOrds=document.getElementById('ords'), elHint=document.getElementById('hint');
+
+function fill(el){el.style.setProperty('--fill',((el.value-el.min)/(el.max-el.min)*100)+'%');}
+
+function calc(){
+  const [name,rate,max] = CITIES[+citySel.value];
+  const c=+cs.value, o=+os.value;
+  const one = Math.min(Math.round(rate*o), max);
+  const total = one*c;
+
+  cv.textContent=c; ov.textContent=o;
+  elRate.textContent=rub(rate);
+  elPer.textContent=rub(one);
+  elCap.textContent=rub(max);
+  elOrds.textContent=(c*o).toLocaleString('ru-RU');
+  elTotal.textContent=rub(total);
+  elSub.textContent=`${name} · ${c} ${plural(c,'курьер','курьера','курьеров')} по ${o} ${plural(o,'заказу','заказа','заказов')}`;
+
+  elHint.textContent = o>=100
+    ? 'Курьер вышел на максимальную ставку — это потолок выплаты за одного человека в этом городе.'
+    : `Если курьер доведёт число заказов до 100 за 20 дней, выплата за него вырастет до ${rub(max)}. Поэтому важно поддерживать связь в первые дни.`;
+
+  fill(cs); fill(os);
+}
+[citySel,cs,os].forEach(el=>el.addEventListener('input',calc));
+calc();
+</script>
+</body>
+</html>
